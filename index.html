@@ -7,333 +7,69 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --teal: #2a9d8f;
-    --teal-dark: #1f7a6e;
-    --teal-light: #e8f5f3;
-    --teal-mid: #c5e8e4;
-    --gray-50: #f8fafb;
-    --gray-100: #f0f4f5;
-    --gray-200: #e2eaeb;
-    --gray-400: #94a3ab;
-    --gray-600: #4a6068;
-    --gray-800: #1e2d32;
-    --white: #ffffff;
-    --radius: 8px;
-    --radius-sm: 5px;
-    --shadow: 0 1px 3px rgba(42,157,143,0.08), 0 4px 16px rgba(42,157,143,0.06);
+    --teal: #2a9d8f; --teal-dark: #1f7a6e; --teal-light: #e8f5f3; --teal-mid: #c5e8e4;
+    --gray-50: #f8fafb; --gray-100: #f0f4f5; --gray-200: #e2eaeb; --gray-400: #94a3ab;
+    --gray-600: #4a6068; --gray-800: #1e2d32; --white: #ffffff;
+    --radius: 8px; --radius-sm: 5px;
     --shadow-card: 0 2px 8px rgba(0,0,0,0.06), 0 0 0 1px rgba(42,157,143,0.1);
   }
-
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--gray-50);
-    color: var(--gray-800);
-    min-height: 100vh;
-  }
-
-  /* TOP BAR */
-  .topbar {
-    background: var(--teal);
-    padding: 0 24px;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 12px rgba(42,157,143,0.3);
-  }
+  body { font-family: 'DM Sans', sans-serif; background: var(--gray-50); color: var(--gray-800); min-height: 100vh; }
+  .topbar { background: var(--teal); padding: 0 24px; height: 48px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 12px rgba(42,157,143,0.3); }
   .topbar-left { display: flex; align-items: center; gap: 12px; }
-  .topbar-logo {
-    width: 28px; height: 28px;
-    background: rgba(255,255,255,0.2);
-    border-radius: 6px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 14px;
-  }
-  .topbar-title { color: white; font-weight: 600; font-size: 14px; letter-spacing: 0.01em; }
-  .topbar-user {
-    color: rgba(255,255,255,0.85);
-    font-size: 12px;
-    font-weight: 500;
-    background: rgba(255,255,255,0.15);
-    padding: 4px 12px;
-    border-radius: 20px;
-  }
-
-  /* LAYOUT */
+  .topbar-logo { width: 28px; height: 28px; background: rgba(255,255,255,0.2); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+  .topbar-title { color: white; font-weight: 600; font-size: 14px; }
+  .topbar-user { color: rgba(255,255,255,0.85); font-size: 12px; font-weight: 500; background: rgba(255,255,255,0.15); padding: 4px 12px; border-radius: 20px; }
   .container { max-width: 1100px; margin: 0 auto; padding: 28px 20px 60px; }
-
-  .page-title {
-    color: var(--teal);
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 20px;
-    letter-spacing: -0.02em;
-  }
-
-  /* SECTION CARD */
-  .section-card {
-    background: var(--white);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-card);
-    margin-bottom: 20px;
-    overflow: hidden;
-  }
-
-  .section-header {
-    background: var(--teal);
-    color: white;
-    padding: 10px 18px;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
-
+  .page-title { color: var(--teal); font-size: 20px; font-weight: 600; margin-bottom: 20px; letter-spacing: -0.02em; }
+  .section-card { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow-card); margin-bottom: 20px; overflow: hidden; }
+  .section-header { background: var(--teal); color: white; padding: 10px 18px; font-size: 13px; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
   .section-body { padding: 20px 18px; }
-
-  /* GRID */
   .grid { display: grid; gap: 14px; }
-  .g-2 { grid-template-columns: 1fr 1fr; }
-  .g-3 { grid-template-columns: 1fr 1fr 1fr; }
-  .g-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
   .g-5 { grid-template-columns: 0.7fr 2.5fr 1fr 1fr 1fr; }
   .g-admit { grid-template-columns: 1fr 1.5fr 2fr 1fr; }
   .g-row3 { grid-template-columns: 1.5fr 1fr 1fr 1.8fr; }
   .g-email { grid-template-columns: 1fr 2fr; }
-
-  /* FIELD */
   .field { display: flex; flex-direction: column; gap: 5px; }
-
-  .field label {
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--gray-400);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
+  .field label { font-size: 11px; font-weight: 600; color: var(--gray-400); letter-spacing: 0.06em; text-transform: uppercase; }
+  .field input[type="text"], .field input[type="date"], .field textarea, .field select {
+    border: 1.5px solid var(--gray-200); border-radius: var(--radius-sm); padding: 9px 12px;
+    font-size: 13px; font-family: 'DM Sans', sans-serif; color: var(--gray-800);
+    background: var(--gray-50); transition: border-color 0.15s, box-shadow 0.15s, background 0.15s; outline: none; width: 100%;
   }
-
-  .field input[type="text"],
-  .field input[type="date"],
-  .field textarea,
-  .field select {
-    border: 1.5px solid var(--gray-200);
-    border-radius: var(--radius-sm);
-    padding: 9px 12px;
-    font-size: 13px;
-    font-family: 'DM Sans', sans-serif;
-    color: var(--gray-800);
-    background: var(--gray-50);
-    transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
-    outline: none;
-    width: 100%;
-  }
-
-  .field input:focus,
-  .field textarea:focus,
-  .field select:focus {
-    border-color: var(--teal);
-    background: var(--white);
-    box-shadow: 0 0 0 3px rgba(42,157,143,0.12);
-  }
-
+  .field input:focus, .field textarea:focus, .field select:focus { border-color: var(--teal); background: var(--white); box-shadow: 0 0 0 3px rgba(42,157,143,0.12); }
   .field textarea { min-height: 90px; resize: vertical; }
-
-  /* EMAIL BLOCK */
-  .email-block {
-    border: 1.5px solid var(--gray-200);
-    border-radius: var(--radius-sm);
-    padding: 14px;
-    background: var(--gray-50);
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .email-block-title {
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--gray-400);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    margin-bottom: 2px;
-  }
-
-  /* CHECKBOX ROW */
+  .email-block { border: 1.5px solid var(--gray-200); border-radius: var(--radius-sm); padding: 14px; background: var(--gray-50); display: flex; flex-direction: column; gap: 12px; }
+  .email-block-title { font-size: 11px; font-weight: 600; color: var(--gray-400); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 2px; }
   .cb-group { display: flex; align-items: center; gap: 8px; }
-  .cb-group input[type="checkbox"] {
-    width: 16px; height: 16px;
-    accent-color: var(--teal);
-    cursor: pointer;
-    border-radius: 3px;
-  }
-  .cb-group label {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--gray-600);
-    cursor: pointer;
-    text-transform: none;
-    letter-spacing: 0;
-  }
-
-  /* SISTEMAS SECTION */
-  .section-sub-title {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--gray-800);
-    padding: 4px 0 14px;
-    letter-spacing: -0.01em;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .section-sub-title::before {
-    content: '';
-    display: inline-block;
-    width: 4px; height: 18px;
-    background: var(--teal);
-    border-radius: 2px;
-  }
-
+  .cb-group input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--teal); cursor: pointer; }
+  .cb-group label { font-size: 13px; font-weight: 500; color: var(--gray-600); cursor: pointer; text-transform: none; letter-spacing: 0; }
+  .section-sub-title { font-size: 15px; font-weight: 600; color: var(--gray-800); padding: 4px 0 14px; display: flex; align-items: center; gap: 8px; }
+  .section-sub-title::before { content: ''; display: inline-block; width: 4px; height: 18px; background: var(--teal); border-radius: 2px; }
   .sys-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-bottom: 12px; }
-
-  .sys-box {
-    border: 1.5px solid var(--gray-200);
-    border-radius: var(--radius);
-    overflow: hidden;
-    background: var(--white);
-    transition: box-shadow 0.2s, border-color 0.2s;
-  }
-  .sys-box:hover {
-    border-color: var(--teal-mid);
-    box-shadow: 0 4px 16px rgba(42,157,143,0.1);
-  }
-
-  .sys-box-header {
-    background: var(--teal-light);
-    padding: 8px 12px;
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--teal-dark);
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    border-bottom: 1.5px solid var(--teal-mid);
-  }
-
+  .sys-box { border: 1.5px solid var(--gray-200); border-radius: var(--radius); overflow: hidden; background: var(--white); transition: box-shadow 0.2s, border-color 0.2s; }
+  .sys-box:hover { border-color: var(--teal-mid); box-shadow: 0 4px 16px rgba(42,157,143,0.1); }
+  .sys-box-header { background: var(--teal-light); padding: 8px 12px; font-size: 11px; font-weight: 700; color: var(--teal-dark); letter-spacing: 0.05em; text-transform: uppercase; border-bottom: 1.5px solid var(--teal-mid); }
   .sys-box-body { padding: 12px; display: flex; flex-direction: column; gap: 10px; }
-
   .sys-field { display: flex; flex-direction: column; gap: 4px; }
-  .sys-field label {
-    font-size: 10px;
-    font-weight: 600;
-    color: var(--gray-400);
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-  }
-  .sys-field input[type="text"] {
-    border: 1.5px solid var(--gray-200);
-    border-radius: var(--radius-sm);
-    padding: 7px 10px;
-    font-size: 12px;
-    font-family: 'DM Sans', sans-serif;
-    color: var(--gray-800);
-    background: var(--gray-50);
-    outline: none;
-    width: 100%;
-    transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
-  }
-  .sys-field input[type="text"]:focus {
-    border-color: var(--teal);
-    background: var(--white);
-    box-shadow: 0 0 0 3px rgba(42,157,143,0.12);
-  }
-
-  /* conditional hidden field */
+  .sys-field label { font-size: 10px; font-weight: 600; color: var(--gray-400); letter-spacing: 0.06em; text-transform: uppercase; }
+  .sys-field input[type="text"] { border: 1.5px solid var(--gray-200); border-radius: var(--radius-sm); padding: 7px 10px; font-size: 12px; font-family: 'DM Sans', sans-serif; color: var(--gray-800); background: var(--gray-50); outline: none; width: 100%; transition: border-color 0.15s, box-shadow 0.15s; }
+  .sys-field input[type="text"]:focus { border-color: var(--teal); background: var(--white); box-shadow: 0 0 0 3px rgba(42,157,143,0.12); }
   .cond-field { display: none; }
   .cond-field.visible { display: flex; flex-direction: column; gap: 4px; }
-
   .sys-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-
-  /* SUBMIT */
-  .submit-area {
-    display: flex;
-    justify-content: flex-end;
-    gap: 12px;
-    padding-top: 8px;
-  }
-
-  .btn-clear {
-    padding: 11px 24px;
-    border: 1.5px solid var(--gray-200);
-    border-radius: var(--radius-sm);
-    background: var(--white);
-    color: var(--gray-600);
-    font-size: 13px;
-    font-weight: 600;
-    font-family: 'DM Sans', sans-serif;
-    cursor: pointer;
-    transition: all 0.15s;
-  }
+  .submit-area { display: flex; justify-content: flex-end; gap: 12px; padding-top: 8px; }
+  .btn-clear { padding: 11px 24px; border: 1.5px solid var(--gray-200); border-radius: var(--radius-sm); background: var(--white); color: var(--gray-600); font-size: 13px; font-weight: 600; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all 0.15s; }
   .btn-clear:hover { border-color: var(--gray-400); background: var(--gray-50); }
-
-  .btn-submit {
-    padding: 11px 32px;
-    background: var(--teal);
-    border: none;
-    border-radius: var(--radius-sm);
-    color: white;
-    font-size: 13px;
-    font-weight: 600;
-    font-family: 'DM Sans', sans-serif;
-    cursor: pointer;
-    transition: all 0.15s;
-    box-shadow: 0 2px 8px rgba(42,157,143,0.3);
-  }
-  .btn-submit:hover { background: var(--teal-dark); box-shadow: 0 4px 16px rgba(42,157,143,0.4); }
-
-  /* PROGRESS BAR */
-  .progress-wrap {
-    height: 3px;
-    background: var(--gray-200);
-    border-radius: 99px;
-    margin-bottom: 24px;
-    overflow: hidden;
-  }
-  .progress-bar {
-    height: 100%;
-    background: var(--teal);
-    border-radius: 99px;
-    width: 0%;
-    transition: width 0.4s ease;
-  }
-
-  /* SUCCESS */
-  .success-toast {
-    display: none;
-    position: fixed;
-    bottom: 28px;
-    right: 28px;
-    background: var(--teal);
-    color: white;
-    padding: 14px 22px;
-    border-radius: var(--radius);
-    font-size: 14px;
-    font-weight: 500;
-    box-shadow: 0 8px 32px rgba(42,157,143,0.4);
-    z-index: 999;
-    animation: slideUp 0.3s ease;
-  }
-  @keyframes slideUp {
-    from { transform: translateY(20px); opacity: 0; }
-    to   { transform: translateY(0);    opacity: 1; }
-  }
-
+  .btn-submit { padding: 11px 32px; background: var(--teal); border: none; border-radius: var(--radius-sm); color: white; font-size: 13px; font-weight: 600; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all 0.15s; box-shadow: 0 2px 8px rgba(42,157,143,0.3); }
+  .btn-submit:hover { background: var(--teal-dark); }
+  .btn-submit:disabled { opacity: 0.7; cursor: not-allowed; }
+  .progress-wrap { height: 3px; background: var(--gray-200); border-radius: 99px; margin-bottom: 24px; overflow: hidden; }
+  .progress-bar { height: 100%; background: var(--teal); border-radius: 99px; width: 0%; transition: width 0.4s ease; }
+  .success-toast { display: none; position: fixed; bottom: 28px; right: 28px; background: var(--teal); color: white; padding: 14px 22px; border-radius: var(--radius); font-size: 14px; font-weight: 500; box-shadow: 0 8px 32px rgba(42,157,143,0.4); z-index: 999; animation: slideUp 0.3s ease; }
+  @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
   @media (max-width: 768px) {
-    .g-5, .g-4, .g-3, .g-2, .g-admit, .g-row3, .g-email { grid-template-columns: 1fr; }
+    .g-5, .g-admit, .g-row3, .g-email { grid-template-columns: 1fr; }
     .sys-grid { grid-template-columns: 1fr; }
     .sys-row-2 { grid-template-columns: 1fr; }
   }
@@ -351,49 +87,34 @@
 
 <div class="container">
   <div class="page-title">Requisição de Rede Interna</div>
-
   <div class="progress-wrap"><div class="progress-bar" id="progressBar"></div></div>
 
   <div class="section-card">
     <div class="section-header">Formulário — Dados do Colaborador</div>
     <div class="section-body">
-
       <div class="grid g-5" style="margin-bottom:14px">
-        <div class="field"><label>Matrícula</label><input type="text" placeholder="Ex: 19144"></div>
-        <div class="field"><label>Nome Completo</label><input type="text" placeholder="Nome do colaborador"></div>
-        <div class="field"><label>Data de Nascimento</label><input type="date"></div>
-        <div class="field"><label>CPF</label><input type="text" placeholder="000.000.000-00"></div>
-        <div class="field"><label>Empresa</label><input type="text" placeholder="Ex: SEDE"></div>
+        <div class="field"><label>Matrícula</label><input type="text" id="f_matricula" placeholder="Ex: 19144"></div>
+        <div class="field"><label>Nome Completo</label><input type="text" id="f_nome" placeholder="Nome do colaborador"></div>
+        <div class="field"><label>Data de Nascimento</label><input type="date" id="f_nascimento"></div>
+        <div class="field"><label>CPF</label><input type="text" id="f_cpf" placeholder="000.000.000-00"></div>
+        <div class="field"><label>Empresa</label><input type="text" id="f_empresa" placeholder="Ex: SEDE"></div>
       </div>
-
       <div class="grid g-admit" style="margin-bottom:14px">
-        <div class="field"><label>Data de Admissão</label><input type="date"></div>
-        <div class="field"><label>Cargo</label><input type="text" placeholder="Ex: 0870-JOVEM APRENDIZ"></div>
-        <div class="field"><label>Área</label><input type="text" placeholder="Ex: CUSTOS ASSISTENCIAIS"></div>
+        <div class="field"><label>Data de Admissão</label><input type="date" id="f_admissao"></div>
+        <div class="field"><label>Cargo</label><input type="text" id="f_cargo" placeholder="Ex: 0870-JOVEM APRENDIZ"></div>
+        <div class="field"><label>Área</label><input type="text" id="f_area" placeholder="Ex: CUSTOS ASSISTENCIAIS"></div>
         <div class="field"><label>Tipo de Requisição</label>
-          <select>
-            <option value="">Selecione...</option>
-            <option>CADASTRO</option>
-            <option>ALTERAÇÃO</option>
-            <option>EXCLUSÃO</option>
-          </select>
+          <select id="f_tipo"><option value="">Selecione...</option><option>CADASTRO</option><option>ALTERAÇÃO</option><option>EXCLUSÃO</option></select>
         </div>
       </div>
-
       <div class="grid g-row3" style="margin-bottom:14px">
-        <div class="field"><label>Solicitante</label><input type="text" placeholder="Nome do solicitante"></div>
-        <div class="field"><label>Setor</label><input type="text" placeholder="Ex: CUSTOS ASSISTENCIAIS"></div>
-        <div class="field"><label>Ramal</label><input type="text" placeholder="Ex: 1104"></div>
+        <div class="field"><label>Solicitante</label><input type="text" id="f_solicitante" placeholder="Nome do solicitante"></div>
+        <div class="field"><label>Setor</label><input type="text" id="f_setor" placeholder="Ex: CUSTOS ASSISTENCIAIS"></div>
+        <div class="field"><label>Ramal</label><input type="text" id="f_ramal" placeholder="Ex: 1104"></div>
         <div class="field"><label>Grupo de Acesso a Internet</label>
-          <select>
-            <option value="">Selecione...</option>
-            <option>Privilegiado</option>
-            <option>Padrão</option>
-            <option>Restrito</option>
-          </select>
+          <select id="f_internet"><option value="">Selecione...</option><option>Privilegiado</option><option>Padrão</option><option>Restrito</option></select>
         </div>
       </div>
-
       <div class="grid g-email">
         <div class="email-block">
           <div class="email-block-title">Email</div>
@@ -403,246 +124,137 @@
           </div>
           <div class="cond-field sys-field" id="emailCond">
             <label>Igualar E-mail de</label>
-            <input type="text" placeholder="usuario.referencia">
+            <input type="text" id="f_igualar_email" placeholder="usuario.referencia">
           </div>
         </div>
-
         <div class="field">
           <label>Observações</label>
-          <textarea placeholder="Informações adicionais relevantes para a requisição..."></textarea>
+          <textarea id="f_obs" placeholder="Informações adicionais relevantes para a requisição..."></textarea>
         </div>
       </div>
-
     </div>
   </div>
 
-  <!-- ACESSO A SISTEMAS -->
   <div class="section-sub-title">Acesso a Sistemas</div>
 
-  <!-- ROW 1 -->
   <div class="sys-grid">
-
     <div class="sys-box">
       <div class="sys-box-header">TOTVS12/GPS</div>
       <div class="sys-box-body">
-        <div class="cb-group">
-          <input type="checkbox" id="cbTotvs" onchange="toggleCond('totvsFields', this.checked)">
-          <label for="cbTotvs">Sim</label>
-        </div>
+        <div class="cb-group"><input type="checkbox" id="cbTotvs" onchange="toggleCond('totvsFields', this.checked)"><label for="cbTotvs">Sim</label></div>
         <div class="cond-field" id="totvsFields">
-          <div class="sys-field">
-            <label>Igualar Perfil TOTVS12/GPS</label>
-            <input type="text" placeholder="Usuário referência">
-          </div>
+          <div class="sys-field"><label>Igualar Perfil TOTVS12/GPS</label><input type="text" id="f_totvs_perfil" placeholder="Usuário referência"></div>
           <div class="sys-row-2">
-            <div>
-              <div style="font-size:10px;font-weight:600;color:var(--gray-400);letter-spacing:.06em;text-transform:uppercase;margin-bottom:5px">Manutenção de Guias</div>
-              <div class="cb-group"><input type="checkbox" id="cbGuias"><label for="cbGuias">Sim</label></div>
-            </div>
-            <div>
-              <div style="font-size:10px;font-weight:600;color:var(--gray-400);letter-spacing:.06em;text-transform:uppercase;margin-bottom:5px">Manutenção de Ocorrências</div>
-              <div class="cb-group"><input type="checkbox" id="cbOcorr"><label for="cbOcorr">Sim</label></div>
-            </div>
+            <div><div style="font-size:10px;font-weight:600;color:var(--gray-400);letter-spacing:.06em;text-transform:uppercase;margin-bottom:5px">Manutenção de Guias</div><div class="cb-group"><input type="checkbox" id="cbGuias"><label for="cbGuias">Sim</label></div></div>
+            <div><div style="font-size:10px;font-weight:600;color:var(--gray-400);letter-spacing:.06em;text-transform:uppercase;margin-bottom:5px">Manutenção de Ocorrências</div><div class="cb-group"><input type="checkbox" id="cbOcorr"><label for="cbOcorr">Sim</label></div></div>
           </div>
         </div>
       </div>
     </div>
-
     <div class="sys-box">
       <div class="sys-box-header">MV</div>
       <div class="sys-box-body">
-        <div class="cb-group">
-          <input type="checkbox" id="cbMV" onchange="toggleCond('mvFields', this.checked)">
-          <label for="cbMV">Sim</label>
-        </div>
-        <div class="cond-field" id="mvFields">
-          <div class="sys-field">
-            <label>Igualar Perfil MV</label>
-            <input type="text" placeholder="Usuário referência">
-          </div>
-        </div>
+        <div class="cb-group"><input type="checkbox" id="cbMV" onchange="toggleCond('mvFields', this.checked)"><label for="cbMV">Sim</label></div>
+        <div class="cond-field" id="mvFields"><div class="sys-field"><label>Igualar Perfil MV</label><input type="text" id="f_mv_perfil" placeholder="Usuário referência"></div></div>
       </div>
     </div>
-
     <div class="sys-box">
       <div class="sys-box-header">Autorizador Web</div>
       <div class="sys-box-body">
-        <div class="cb-group">
-          <input type="checkbox" id="cbAuth" onchange="toggleCond('authFields', this.checked)">
-          <label for="cbAuth">Sim</label>
-        </div>
-        <div class="cond-field" id="authFields">
-          <div class="sys-field">
-            <label>Igualar Perfil Autorizador Web</label>
-            <input type="text" placeholder="Usuário referência">
-          </div>
-        </div>
+        <div class="cb-group"><input type="checkbox" id="cbAuth" onchange="toggleCond('authFields', this.checked)"><label for="cbAuth">Sim</label></div>
+        <div class="cond-field" id="authFields"><div class="sys-field"><label>Igualar Perfil Autorizador Web</label><input type="text" id="f_auth_perfil" placeholder="Usuário referência"></div></div>
       </div>
     </div>
-
   </div>
 
-  <!-- ROW 2 -->
   <div class="sys-grid">
-
     <div class="sys-box">
       <div class="sys-box-header">Igualar Sistemas Estratégicos</div>
-      <div class="sys-box-body">
-        <div class="sys-field">
-          <label>Usuário referência</label>
-          <input type="text" placeholder="Usuário referência">
-        </div>
-      </div>
+      <div class="sys-box-body"><div class="sys-field"><label>Usuário referência</label><input type="text" id="f_sistemas_est" placeholder="Usuário referência"></div></div>
     </div>
-
     <div class="sys-box">
       <div class="sys-box-header">Matrix</div>
       <div class="sys-box-body">
-        <div class="cb-group">
-          <input type="checkbox" id="cbMatrix" onchange="toggleCond('matrixFields', this.checked)">
-          <label for="cbMatrix">Sim</label>
-        </div>
-        <div class="cond-field" id="matrixFields">
-          <div class="sys-field">
-            <label>Igualar Perfil Matrix</label>
-            <input type="text" placeholder="Usuário referência">
-          </div>
-        </div>
+        <div class="cb-group"><input type="checkbox" id="cbMatrix" onchange="toggleCond('matrixFields', this.checked)"><label for="cbMatrix">Sim</label></div>
+        <div class="cond-field" id="matrixFields"><div class="sys-field"><label>Igualar Perfil Matrix</label><input type="text" id="f_matrix_perfil" placeholder="Usuário referência"></div></div>
       </div>
     </div>
-
     <div class="sys-box">
       <div class="sys-box-header">IDCE/MCOCKPIT</div>
       <div class="sys-box-body">
-        <div class="cb-group">
-          <input type="checkbox" id="cbIdce" onchange="toggleCond('idceFields', this.checked)">
-          <label for="cbIdce">Sim</label>
-        </div>
-        <div class="cond-field" id="idceFields">
-          <div class="sys-field">
-            <label>Igualar Perfil IDCE/MCOCKPIT</label>
-            <input type="text" placeholder="Usuário referência">
-          </div>
-        </div>
+        <div class="cb-group"><input type="checkbox" id="cbIdce" onchange="toggleCond('idceFields', this.checked)"><label for="cbIdce">Sim</label></div>
+        <div class="cond-field" id="idceFields"><div class="sys-field"><label>Igualar Perfil IDCE/MCOCKPIT</label><input type="text" id="f_idce_perfil" placeholder="Usuário referência"></div></div>
       </div>
     </div>
-
   </div>
 
-  <!-- ROW 3 -->
   <div class="sys-grid">
-
     <div class="sys-box">
       <div class="sys-box-header">Portal &amp; Acesso a Pastas</div>
       <div class="sys-box-body">
-        <div class="sys-field">
-          <label>Igualar Perfil Portal</label>
-          <input type="text" placeholder="Usuário referência">
-        </div>
-        <div class="sys-field">
-          <label>Igualar Acesso a Pastas</label>
-          <input type="text" placeholder="Usuário referência">
-        </div>
+        <div class="sys-field"><label>Igualar Perfil Portal</label><input type="text" id="f_portal_perfil" placeholder="Usuário referência"></div>
+        <div class="sys-field"><label>Igualar Acesso a Pastas</label><input type="text" id="f_pastas" placeholder="Usuário referência"></div>
       </div>
     </div>
-
     <div class="sys-box">
       <div class="sys-box-header">GREEN</div>
       <div class="sys-box-body">
-        <div class="cb-group">
-          <input type="checkbox" id="cbGreen" onchange="toggleCond('greenFields', this.checked)">
-          <label for="cbGreen">Sim</label>
-        </div>
-        <div class="cond-field" id="greenFields">
-          <div class="sys-field">
-            <label>Igualar Perfil GREEN</label>
-            <input type="text" placeholder="Usuário referência">
-          </div>
-        </div>
+        <div class="cb-group"><input type="checkbox" id="cbGreen" onchange="toggleCond('greenFields', this.checked)"><label for="cbGreen">Sim</label></div>
+        <div class="cond-field" id="greenFields"><div class="sys-field"><label>Igualar Perfil GREEN</label><input type="text" id="f_green_perfil" placeholder="Usuário referência"></div></div>
       </div>
     </div>
-
     <div class="sys-box">
       <div class="sys-box-header">NEOH</div>
       <div class="sys-box-body">
-        <div class="cb-group">
-          <input type="checkbox" id="cbNeoh" onchange="toggleCond('neohFields', this.checked)">
-          <label for="cbNeoh">Sim</label>
-        </div>
-        <div class="cond-field" id="neohFields">
-          <div class="sys-field">
-            <label>Igualar Perfil NEOH</label>
-            <input type="text" placeholder="Usuário referência">
-          </div>
-        </div>
+        <div class="cb-group"><input type="checkbox" id="cbNeoh" onchange="toggleCond('neohFields', this.checked)"><label for="cbNeoh">Sim</label></div>
+        <div class="cond-field" id="neohFields"><div class="sys-field"><label>Igualar Perfil NEOH</label><input type="text" id="f_neoh_perfil" placeholder="Usuário referência"></div></div>
       </div>
     </div>
-
   </div>
 
-  <!-- ROW 4 -->
   <div class="sys-grid">
-
     <div class="sys-box">
       <div class="sys-box-header">Sênior</div>
       <div class="sys-box-body">
         <div style="font-size:10px;color:var(--gray-400);margin-bottom:4px">Exclusivo Ger. Desenv. Pessoas e Gestão de Pessoas</div>
-        <div class="cb-group">
-          <input type="checkbox" id="cbSenior" onchange="toggleCond('seniorFields', this.checked)">
-          <label for="cbSenior">Sim</label>
-        </div>
-        <div class="cond-field" id="seniorFields">
-          <div class="sys-field">
-            <label>Igualar Perfil Sênior</label>
-            <input type="text" placeholder="Usuário referência">
-          </div>
-        </div>
+        <div class="cb-group"><input type="checkbox" id="cbSenior" onchange="toggleCond('seniorFields', this.checked)"><label for="cbSenior">Sim</label></div>
+        <div class="cond-field" id="seniorFields"><div class="sys-field"><label>Igualar Perfil Sênior</label><input type="text" id="f_senior_perfil" placeholder="Usuário referência"></div></div>
       </div>
     </div>
-
     <div class="sys-box">
       <div class="sys-box-header">Blip</div>
       <div class="sys-box-body">
-        <div class="cb-group">
-          <input type="checkbox" id="cbBlip" onchange="toggleCond('blipFields', this.checked)">
-          <label for="cbBlip">Sim</label>
-        </div>
-        <div class="cond-field" id="blipFields">
-          <div class="sys-field">
-            <label>Igualar Perfil Blip</label>
-            <input type="text" placeholder="Usuário referência">
-          </div>
-        </div>
+        <div class="cb-group"><input type="checkbox" id="cbBlip" onchange="toggleCond('blipFields', this.checked)"><label for="cbBlip">Sim</label></div>
+        <div class="cond-field" id="blipFields"><div class="sys-field"><label>Igualar Perfil Blip</label><input type="text" id="f_blip_perfil" placeholder="Usuário referência"></div></div>
       </div>
     </div>
-
     <div></div>
   </div>
 
-  <!-- BUTTONS -->
   <div class="submit-area">
     <button class="btn-clear" onclick="clearForm()">Limpar tudo</button>
-    <button class="btn-submit" onclick="submitForm()">✓ Enviar Requisição</button>
+    <button class="btn-submit" id="btnSubmit" onclick="submitForm()">✓ Enviar Requisição</button>
   </div>
-
 </div>
 
 <div class="success-toast" id="toast">✅ Requisição enviada com sucesso!</div>
 
 <script>
+  // ============================================================
+  // ⚙️ CONFIGURAÇÃO — cole a URL do Apps Script após criar
+  // ============================================================
+  const GOOGLE_SCRIPT_URL = 'COLE_AQUI_A_URL_DO_APPS_SCRIPT';
+
   function toggleCond(id, show) {
-    const el = document.getElementById(id);
-    if (show) el.classList.add('visible');
-    else el.classList.remove('visible');
+    document.getElementById(id).classList.toggle('visible', show);
     updateProgress();
   }
 
   function updateProgress() {
     const inputs = document.querySelectorAll('input[type="text"], input[type="date"], select, textarea');
     let filled = 0;
-    inputs.forEach(i => { if (i.value && i.value.trim() !== '') filled++; });
-    const pct = Math.min(100, Math.round((filled / inputs.length) * 100));
-    document.getElementById('progressBar').style.width = pct + '%';
+    inputs.forEach(i => { if (i.value && i.value.trim()) filled++; });
+    document.getElementById('progressBar').style.width = Math.min(100, Math.round((filled / inputs.length) * 100)) + '%';
   }
 
   document.querySelectorAll('input, select, textarea').forEach(el => {
@@ -650,28 +262,110 @@
     el.addEventListener('change', updateProgress);
   });
 
-  function clearForm() {
-    if (!confirm('Limpar todos os campos preenchidos?')) return;
-    document.querySelectorAll('input[type="text"], input[type="date"], textarea').forEach(i => i.value = '');
-    document.querySelectorAll('select').forEach(s => s.selectedIndex = 0);
-    document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
-      cb.checked = false;
-      cb.dispatchEvent(new Event('change'));
-    });
-    document.querySelectorAll('.cond-field').forEach(el => el.classList.remove('visible'));
-    updateProgress();
+  function val(id) { const el = document.getElementById(id); return el ? el.value.trim() : ''; }
+  function cb(id)  { const el = document.getElementById(id); return el && el.checked ? 'Sim' : 'Não'; }
+
+  function coletarDados() {
+    return {
+      'Matrícula':                     val('f_matricula'),
+      'Nome':                          val('f_nome'),
+      'Data de Nascimento':            val('f_nascimento'),
+      'CPF':                           val('f_cpf'),
+      'Empresa':                       val('f_empresa'),
+      'Data de Admissão':              val('f_admissao'),
+      'Cargo':                         val('f_cargo'),
+      'Área':                          val('f_area'),
+      'Tipo de Requisição':            val('f_tipo'),
+      'Solicitante':                   val('f_solicitante'),
+      'Setor':                         val('f_setor'),
+      'Ramal':                         val('f_ramal'),
+      'Grupo de Acesso a Internet':    val('f_internet'),
+      'Email':                         cb('cbEmail'),
+      'Igualar Email':                 val('f_igualar_email'),
+      'Observações':                   val('f_obs'),
+      'TOTVS12/GPS':                   cb('cbTotvs'),
+      'Igualar Perfil TOTVS12/GPS':    val('f_totvs_perfil'),
+      'Manutenção de Guias':           cb('cbGuias'),
+      'Manutenção de Ocorrências':     cb('cbOcorr'),
+      'MV':                            cb('cbMV'),
+      'Igualar Perfil MV':             val('f_mv_perfil'),
+      'Autorizador Web':               cb('cbAuth'),
+      'Igualar Perfil Autorizador Web':val('f_auth_perfil'),
+      'Igualar Sistemas Estratégicos': val('f_sistemas_est'),
+      'Matrix':                        cb('cbMatrix'),
+      'Igualar Perfil Matrix':         val('f_matrix_perfil'),
+      'IDCE/MCOCKPIT':                 cb('cbIdce'),
+      'Igualar Perfil IDCE/MCOCKPIT':  val('f_idce_perfil'),
+      'Igualar Perfil Portal':         val('f_portal_perfil'),
+      'Igualar Acesso a Pastas':       val('f_pastas'),
+      'GREEN':                         cb('cbGreen'),
+      'Igualar Perfil GREEN':          val('f_green_perfil'),
+      'NEOH':                          cb('cbNeoh'),
+      'Igualar Perfil NEOH':           val('f_neoh_perfil'),
+      'Sênior':                        cb('cbSenior'),
+      'Igualar Perfil Sênior':         val('f_senior_perfil'),
+      'Blip':                          cb('cbBlip'),
+      'Igualar Perfil Blip':           val('f_blip_perfil'),
+      'Data Envio':                    new Date().toLocaleString('pt-BR')
+    };
   }
 
-  function submitForm() {
-    const required = ['Matrícula','Nome Completo','CPF','Data de Admissão','Cargo','Área','Solicitante','Setor'];
-    const inputs = document.querySelectorAll('input[type="text"], input[type="date"]');
+  async function submitForm() {
+    const obrigatorios = ['f_matricula','f_nome','f_cpf','f_admissao','f_cargo','f_area','f_solicitante','f_setor'];
     let allOk = true;
-    inputs.forEach(i => { if (!i.value.trim()) { i.style.borderColor = '#e76f51'; allOk = false; }
-                          else i.style.borderColor = ''; });
-    if (!allOk) { alert('Por favor, preencha todos os campos obrigatórios.'); return; }
-    const toast = document.getElementById('toast');
-    toast.style.display = 'block';
-    setTimeout(() => toast.style.display = 'none', 3500);
+    obrigatorios.forEach(id => {
+      const el = document.getElementById(id);
+      if (!el.value.trim()) { el.style.borderColor = '#e76f51'; allOk = false; }
+      else el.style.borderColor = '';
+    });
+    if (!allOk) { alert('Por favor, preencha todos os campos obrigatórios destacados em vermelho.'); return; }
+
+    const btn = document.getElementById('btnSubmit');
+    btn.textContent = '⏳ Enviando...';
+    btn.disabled = true;
+
+    const dados = coletarDados();
+
+    // 1️⃣ E-MAIL via Formsubmit
+    const emailPromise = fetch('https://formsubmit.co/ajax/adriano.lima@unimedvr.com.br', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify({
+        _subject: 'Requisição de Rede Interna — ' + (dados['Nome'] || 'Novo colaborador'),
+        _template: 'table',
+        ...dados
+      })
+    }).catch(() => null);
+
+    // 2️⃣ GOOGLE SHEETS via Apps Script
+    const sheetsPromise = GOOGLE_SCRIPT_URL !== 'https://script.google.com/macros/s/AKfycbxYxvjXcvyfoQinocRwYQ1kC7ptMamNOkkdutLpLpDQqk_fRtktVsIa1qzNsZj0voZ2/exec'
+      ? fetch(GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(dados)
+        }).catch(() => null)
+      : Promise.resolve();
+
+    await Promise.all([emailPromise, sheetsPromise]);
+
+    btn.textContent = '✓ Enviar Requisição';
+    btn.disabled = false;
+
+    document.getElementById('toast').style.display = 'block';
+    setTimeout(() => document.getElementById('toast').style.display = 'none', 4000);
+    clearForm();
+  }
+
+  function clearForm() {
+    if (event && event.type === 'click' && event.currentTarget.classList.contains('btn-clear')) {
+      if (!confirm('Limpar todos os campos preenchidos?')) return;
+    }
+    document.querySelectorAll('input[type="text"], input[type="date"], textarea').forEach(i => i.value = '');
+    document.querySelectorAll('select').forEach(s => s.selectedIndex = 0);
+    document.querySelectorAll('input[type="checkbox"]').forEach(cb => { cb.checked = false; cb.dispatchEvent(new Event('change')); });
+    document.querySelectorAll('.cond-field').forEach(el => el.classList.remove('visible'));
+    updateProgress();
   }
 </script>
 </body>
