@@ -243,7 +243,7 @@
   // ============================================================
   // ⚙️ CONFIGURAÇÃO — cole a URL do Apps Script após criar
   // ============================================================
-  const GOOGLE_SCRIPT_URL = 'COLE_AQUI_A_URL_DO_APPS_SCRIPT';
+  const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxYxvjXcvyfoQinocRwYQ1kC7ptMamNOkkdutLpLpDQqk_fRtktVsIa1qzNsZj0voZ2/exec';
 
   function toggleCond(id, show) {
     document.getElementById(id).classList.toggle('visible', show);
@@ -338,7 +338,7 @@
     }).catch(() => null);
 
     // 2️⃣ GOOGLE SHEETS via Apps Script
-    const sheetsPromise = GOOGLE_SCRIPT_URL !== 'https://script.google.com/macros/s/AKfycbxYxvjXcvyfoQinocRwYQ1kC7ptMamNOkkdutLpLpDQqk_fRtktVsIa1qzNsZj0voZ2/exec'
+    const sheetsPromise = GOOGLE_SCRIPT_URL !== 'COLE_AQUI_A_URL_DO_APPS_SCRIPT'
       ? fetch(GOOGLE_SCRIPT_URL, {
           method: 'POST',
           mode: 'no-cors',
