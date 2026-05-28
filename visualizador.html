@@ -196,7 +196,8 @@ function sysField(label, val) {
   return '<div class="sys-field"><div class="sys-label">'+label+'</div><div class="sys-val'+(f?' filled':'')+'">'+( val||'&nbsp;')+'</div></div>';
 }
 
-function renderForm(r) {
+function renderForm(r, i) {
+  if (i === undefined) i = atual;
   let html = '';
   html += '<div class="topbar"><span class="topbar-title">🌐 Requisição de Rede Interna</span><span class="topbar-badge">TI · Acesso Corporativo</span></div>';
   html += '<div class="bar"></div>';
@@ -300,7 +301,10 @@ function renderForm(r) {
   return html;
 }
 
+let listaAtual = [];
+
 function renderLista(lista) {
+  listaAtual = lista;
   const el = document.getElementById('lista');
   document.getElementById('subtitulo').textContent = lista.length + ' requisição(ões)';
   if (!lista.length) { el.innerHTML = '<div class="vazio">Nenhuma requisição encontrada.</div>'; return; }
@@ -309,7 +313,7 @@ function renderLista(lista) {
     const bc = tipo==='CADASTRO'?'badge-cad':tipo==='ALTERAÇÃO'?'badge-alt':'badge-exc';
     return '<div class="item" onclick="selecionar('+i+')" id="item-'+i+'">'
       +'<div class="item-nome">'+(v(r,'Nome')||'Sem nome')+(tipo?'<span class="badge '+bc+'">'+tipo+'</span>':'')+'</div>'
-      +'<div class="item-info">'+(v(r,'Data Envio')||v(r,'Data de Admissão'))+'</div>'
+      +'<div class="item-info">'+v(r,'Data Envio')+'</div>'
       +'</div>';
   }).join('');
 }
@@ -317,11 +321,16 @@ function renderLista(lista) {
 function selecionar(i) {
   atual = i;
   document.querySelectorAll('.item').forEach((el,j) => el.classList.toggle('ativo', j===i));
-  document.getElementById('main').innerHTML = renderForm(todos[i]);
+  const r = listaAtual[i];
+  // Encontra index real no array todos para excluir
+  const indexReal = todos.findIndex(t => t['Matrícula'] === r['Matrícula'] && t['Nome'] === r['Nome'] && t['Data Envio'] === r['Data Envio']);
+  document.getElementById('main').innerHTML = renderForm(r, indexReal >= 0 ? indexReal : i);
 }
 
 function filtrar(q) {
-  const filtrados = todos.filter(r => (v(r,'Nome')+v(r,'Matrícula')+v(r,'Setor')).toLowerCase().includes(q.toLowerCase()));
+  const filtrados = q
+    ? todos.filter(r => (v(r,'Nome')+v(r,'Matrícula')+v(r,'Setor')).toLowerCase().includes(q.toLowerCase()))
+    : todos;
   renderLista(filtrados);
 }
 
