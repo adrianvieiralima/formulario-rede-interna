@@ -326,28 +326,13 @@
 
     const dados = coletarDados();
 
-    // 1️⃣ E-MAIL via Formsubmit
-    const emailPromise = fetch('https://formsubmit.co/ajax/adriano.lima@unimedvr.com.br', {
+    // Envia para Google Apps Script (salva na planilha + envia e-mail HTML)
+    await fetch(GOOGLE_SCRIPT_URL, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify({
-        _subject: 'Requisição de Rede Interna — ' + (dados['Nome'] || 'Novo colaborador'),
-        _template: 'table',
-        ...dados
-      })
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(dados)
     }).catch(() => null);
-
-    // 2️⃣ GOOGLE SHEETS via Apps Script
-    const sheetsPromise = GOOGLE_SCRIPT_URL !== 'COLE_AQUI_A_URL_DO_APPS_SCRIPT'
-      ? fetch(GOOGLE_SCRIPT_URL, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(dados)
-        }).catch(() => null)
-      : Promise.resolve();
-
-    await Promise.all([emailPromise, sheetsPromise]);
 
     btn.textContent = '✓ Enviar Requisição';
     btn.disabled = false;
