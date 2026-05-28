@@ -121,12 +121,33 @@
 </div>
 
 <script>
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxSxiqY4gOQS7d4iQjkMcOXNiv1zD_G1OWIjWjN4yDUmYCeClU5LGuzjlTGnkeDlKgt/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwUe-XM4CcT5c38i_XWBKNvvkhYHGl9As5avSJ2zU7VrsRs87crG-VFBkPupN16vAmq/exec';
 
 let todos = [];
 let atual = -1;
 
-function v(r, k) { return (r[k] || '').toString().trim(); }
+function formatarData(val) {
+  if (!val) return '';
+  // Se for string tipo "Wed Apr 29 2026 00:00:00 GMT-0300..."
+  const d = new Date(val);
+  if (!isNaN(d.getTime()) && val.toString().length > 10) {
+    return d.toLocaleDateString('pt-BR');
+  }
+  // Se já for formato yyyy-mm-dd
+  if (/^\d{4}-\d{2}-\d{2}/.test(val)) {
+    const [y,m,dy] = val.split('-');
+    return dy.substring(0,2)+'/'+m+'/'+y;
+  }
+  return val;
+}
+
+function v(r, k) {
+  const val = (r[k] || '').toString().trim();
+  // Campos de data
+  const camposData = ['Data de Nascimento','Data de Admissão','Data Envio'];
+  if (camposData.includes(k)) return formatarData(val);
+  return val;
+}
 function sim(r, k) { return v(r, k) === 'Sim'; }
 
 function fval(val) {
