@@ -152,7 +152,7 @@
 </div>
 
 <script>
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxIG3dvbYB803WosrxU8hdrB9prYiCpf5QhO3gN4sj2Z5pmlXe6VoEXZbVa5nxpl2Ph/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycby9lUD0ziUQc1YMlXe4QYZXWgbOwPj2uID72VowrJr9Ul26nVbKK8VrHUKRVoGrcQ9l/exec';
 
 let todos = [];
 let atual = -1;
@@ -340,37 +340,42 @@ function fecharConfirm() {
   indexParaExcluir = -1;
 }
 
-async function confirmarExclusao() {
+function jsonp(url, callback) {
+  const name = 'cb_' + Date.now();
+  window[name] = function(data) {
+    delete window[name];
+    document.getElementById('jsonp-script')?.remove();
+    callback(data);
+  };
+  const s = document.createElement('script');
+  s.id = 'jsonp-script';
+  s.src = url + '&callback=' + name;
+  document.body.appendChild(s);
+}
+
+function confirmarExclusao() {
   if (indexParaExcluir < 0) return;
   const btn = document.getElementById('btnConfirmar');
   btn.textContent = 'Excluindo...';
   btn.disabled = true;
 
-  try {
-    const res = await fetch(SCRIPT_URL + '?action=deletar&index=' + indexParaExcluir);
-    const data = await res.json();
-    if (data.status === 'ok') {
+  jsonp(SCRIPT_URL + '?action=deletar&index=' + indexParaExcluir, function(data) {
+    if (data && data.status === 'ok') {
       todos.splice(indexParaExcluir, 1);
       fecharConfirm();
       document.getElementById('main').innerHTML = '<div class="placeholder"><div class="placeholder-inner"><div>✅</div><div>Requisição excluída com sucesso!</div></div></div>';
       renderLista(todos);
     } else {
-      alert('Erro ao excluir: ' + (data.message || 'Tente novamente.'));
+      alert('Erro ao excluir: ' + (data && data.message ? data.message : 'Tente novamente.'));
       btn.textContent = 'Sim, excluir';
       btn.disabled = false;
     }
-  } catch(e) {
-    alert('Erro de conexão. Tente novamente.');
-    btn.textContent = 'Sim, excluir';
-    btn.disabled = false;
-  }
+  });
 }
 
-// Carrega dados via fetch do Apps Script
-async function carregar() {
-  try {
-    const res = await fetch(SCRIPT_URL + '?action=listar');
-    const data = await res.json();
+// Carrega dados via JSONP (contorna CORS)
+function carregar() {
+  jsonp(SCRIPT_URL + '?action=listar', function(data) {
     if (data && data.length) {
       todos = data;
       renderLista(todos);
@@ -379,10 +384,7 @@ async function carregar() {
       document.getElementById('subtitulo').textContent = 'Sem dados';
       document.getElementById('lista').innerHTML = '<div class="vazio">Nenhuma requisição ainda.</div>';
     }
-  } catch(e) {
-    document.getElementById('subtitulo').textContent = 'Erro ao carregar';
-    document.getElementById('lista').innerHTML = '<div class="vazio">Não foi possível carregar. Verifique a URL do Apps Script.</div>';
-  }
+  });
 }
 carregar();
 </script>
