@@ -85,6 +85,37 @@
 
   .footer { background: white; border: 1.5px solid var(--gray-200); border-radius: 0 0 var(--radius) var(--radius); padding: 11px 16px; display: flex; justify-content: space-between; font-size: 11px; color: var(--gray-400); margin-top: -1px; }
 
+  /* DELETE BUTTON */
+  .btn-excluir {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 8px 18px; background: white; color: #dc2626;
+    border: 1.5px solid #fca5a5; border-radius: var(--radius-sm);
+    font-size: 12px; font-weight: 600; font-family: 'DM Sans', sans-serif;
+    cursor: pointer; transition: all .15s; margin-bottom: 16px;
+  }
+  .btn-excluir:hover { background: #fee2e2; border-color: #dc2626; }
+  .btn-excluir:disabled { opacity: .5; cursor: not-allowed; }
+
+  .confirm-overlay {
+    display: none; position: fixed; inset: 0;
+    background: rgba(0,0,0,.4); z-index: 999;
+    align-items: center; justify-content: center;
+  }
+  .confirm-overlay.show { display: flex; }
+  .confirm-box {
+    background: white; border-radius: var(--radius);
+    padding: 28px 32px; max-width: 400px; width: 90%;
+    box-shadow: 0 20px 60px rgba(0,0,0,.2);
+    text-align: center;
+  }
+  .confirm-icon { font-size: 36px; margin-bottom: 12px; }
+  .confirm-title { font-size: 16px; font-weight: 600; color: var(--gray-800); margin-bottom: 8px; }
+  .confirm-msg { font-size: 13px; color: var(--gray-600); margin-bottom: 24px; line-height: 1.5; }
+  .confirm-btns { display: flex; gap: 10px; justify-content: center; }
+  .btn-cancelar { padding: 9px 24px; border: 1.5px solid var(--gray-200); border-radius: var(--radius-sm); background: white; color: var(--gray-600); font-size: 13px; font-weight: 600; font-family: 'DM Sans', sans-serif; cursor: pointer; }
+  .btn-confirmar { padding: 9px 24px; border: none; border-radius: var(--radius-sm); background: #dc2626; color: white; font-size: 13px; font-weight: 600; font-family: 'DM Sans', sans-serif; cursor: pointer; }
+  .btn-confirmar:hover { background: #b91c1c; }
+
   @media (max-width: 1000px) {
     .g5, .g4a, .g4b, .g2 { grid-template-columns: 1fr 1fr; }
     .sys-grid { grid-template-columns: 1fr 1fr; }
@@ -121,7 +152,7 @@
 </div>
 
 <script>
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwUe-XM4CcT5c38i_XWBKNvvkhYHGl9As5avSJ2zU7VrsRs87crG-VFBkPupN16vAmq/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxIG3dvbYB803WosrxU8hdrB9prYiCpf5QhO3gN4sj2Z5pmlXe6VoEXZbVa5nxpl2Ph/exec';
 
 let todos = [];
 let atual = -1;
@@ -169,6 +200,7 @@ function renderForm(r) {
   let html = '';
   html += '<div class="topbar"><span class="topbar-title">🌐 Requisição de Rede Interna</span><span class="topbar-badge">TI · Acesso Corporativo</span></div>';
   html += '<div class="bar"></div>';
+  html += '<button class="btn-excluir" onclick="pedirConfirmacao('+i+')" id="btnExcluir">🗑️ Excluir esta requisição</button>';
 
   // DADOS DO COLABORADOR
   html += '<div class="section-card"><div class="section-hd">Formulário — Dados do Colaborador</div><div class="section-body">';
@@ -293,6 +325,47 @@ function filtrar(q) {
   renderLista(filtrados);
 }
 
+let indexParaExcluir = -1;
+
+function pedirConfirmacao(i) {
+  const nome = todos[i] ? (todos[i]['Nome'] || 'esta requisição') : 'esta requisição';
+  document.getElementById('confirmMsg').innerHTML = 
+    'Deseja excluir a requisição de <strong>' + nome + '</strong>?<br>Esta ação não pode ser desfeita.';
+  indexParaExcluir = i;
+  document.getElementById('confirmOverlay').classList.add('show');
+}
+
+function fecharConfirm() {
+  document.getElementById('confirmOverlay').classList.remove('show');
+  indexParaExcluir = -1;
+}
+
+async function confirmarExclusao() {
+  if (indexParaExcluir < 0) return;
+  const btn = document.getElementById('btnConfirmar');
+  btn.textContent = 'Excluindo...';
+  btn.disabled = true;
+
+  try {
+    const res = await fetch(SCRIPT_URL + '?action=deletar&index=' + indexParaExcluir);
+    const data = await res.json();
+    if (data.status === 'ok') {
+      todos.splice(indexParaExcluir, 1);
+      fecharConfirm();
+      document.getElementById('main').innerHTML = '<div class="placeholder"><div class="placeholder-inner"><div>✅</div><div>Requisição excluída com sucesso!</div></div></div>';
+      renderLista(todos);
+    } else {
+      alert('Erro ao excluir: ' + (data.message || 'Tente novamente.'));
+      btn.textContent = 'Sim, excluir';
+      btn.disabled = false;
+    }
+  } catch(e) {
+    alert('Erro de conexão. Tente novamente.');
+    btn.textContent = 'Sim, excluir';
+    btn.disabled = false;
+  }
+}
+
 // Carrega dados via fetch do Apps Script
 async function carregar() {
   try {
@@ -313,5 +386,18 @@ async function carregar() {
 }
 carregar();
 </script>
+<!-- MODAL DE CONFIRMAÇÃO -->
+<div class="confirm-overlay" id="confirmOverlay">
+  <div class="confirm-box">
+    <div class="confirm-icon">🗑️</div>
+    <div class="confirm-title">Excluir requisição?</div>
+    <div class="confirm-msg" id="confirmMsg">Esta ação não pode ser desfeita.<br>A requisição será removida permanentemente.</div>
+    <div class="confirm-btns">
+      <button class="btn-cancelar" onclick="fecharConfirm()">Cancelar</button>
+      <button class="btn-confirmar" id="btnConfirmar" onclick="confirmarExclusao()">Sim, excluir</button>
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
